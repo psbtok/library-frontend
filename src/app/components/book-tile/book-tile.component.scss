@@ -1,0 +1,15 @@
+.book-tile {
+    width: 260px;
+    height: 320px;
+    padding: 24px;
+    margin: 16px;
+    border-radius: 16px;
+    border: 2px solid #FFBF69;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.book-tile:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}

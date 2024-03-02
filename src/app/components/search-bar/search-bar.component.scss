@@ -1,0 +1,25 @@
+.search-bar-container {
+    margin: 0 16px;
+}
+
+.search-bar {
+    font-size: 1.2em;
+    font-weight: 500;
+    padding: 16px 32px;
+    width: 450px;
+    max-width: 100%;
+    display: block;
+    border: 2px solid #FFBF69;
+    border-radius: 16px;
+    outline: none;
+    transition-duration: .1s;
+    color: #494949;
+}
+
+.btn-search{
+    position: absolute;
+}
+
+.btn-clear{
+    position: absolute;
+}

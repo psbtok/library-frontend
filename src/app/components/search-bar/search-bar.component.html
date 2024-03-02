@@ -1,0 +1,15 @@
+<div class="search-bar-container">
+    <input 
+      class="search-bar"
+      type="text" 
+      placeholder="Search by Title or Author..." 
+      [(ngModel)]="searchTerm"
+      (input)="search()"
+    >
+    <button 
+      class="btn-clear"
+      *ngIf="searchTerm" 
+      (click)="clearSearch()"
+    >Clear</button>
+  </div>
+  

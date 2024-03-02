@@ -6,11 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'http://localhost:8000/books';
+  private apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
-
+  
   getBooks(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const booksUrl = `${this.apiUrl}/books`;
+    return this.http.get<any[]>(booksUrl);
+  }
+
+  getAuthors(): Observable<any[]> {
+    const authorsUrl = `${this.apiUrl}/authors`;
+    return this.http.get<any[]>(authorsUrl);
   }
 }
