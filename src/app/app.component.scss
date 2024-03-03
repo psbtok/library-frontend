@@ -5,7 +5,25 @@
 }
 
 .router {
-    margin: 100px;
+    margin: 32px;
     width: 100%;
     max-width: 1200px;
+}
+
+.header {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 32px;
+    left: 48px;
+    z-index: 10;
+}
+
+.link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.25em;
+    margin-bottom: 8px;
 }
