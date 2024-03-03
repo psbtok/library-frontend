@@ -26,7 +26,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 16px;
-    padding: 32px;
+    padding: 24px 32px;
 }
 
 .info {
@@ -44,6 +44,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    margin-bottom: 16px;
 }
 
 .book-title {
@@ -66,3 +67,15 @@
     flex-direction: row;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.right-details {
+    margin-left: 32px;
+    width: 60%;
+}
+
+.author {
+    margin-bottom: 4px;
+}

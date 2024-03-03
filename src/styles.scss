@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap');
 
+:root {
+    --grey: #363636;
+    --light-grey: #7a7a7a;
+    --yellow: #FFBF69;
+    --light-yellow: rgb(255, 251, 246);
+}
+
 html {
     font-family: "Golos Text", sans-serif;
     overflow: -moz-scrollbars-vertical; 
@@ -10,10 +17,5 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-:root {
-    --grey: #494949;
-    --light-grey: #7a7a7a;
-    --yellow: #FFBF69;
+    color: var(--grey)
 }

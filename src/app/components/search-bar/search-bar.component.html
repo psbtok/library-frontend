@@ -1,13 +1,33 @@
+<!-- search-bar.component.html -->
+
 <div class="search-bar-container">
-    <input 
+  <div class="filter-block-upper">
+    <input
       class="search-bar"
-      type="text" 
-      placeholder="Search by Title or Author..." 
+      type="text"
+      placeholder="Search by Title, Author, or Description..."
       [(ngModel)]="searchTerm"
-      (input)="search()"
+      (input)="emitFilterChanges()"
     >
-    <span class="btn-clear" *ngIf="searchTerm" (click)="clearSearch()">
-      <i class="fa fa-times"></i>
-    </span>
+    <input class="select-pages" type="number" placeholder="Min Pages" [(ngModel)]="minPages" (input)="filterChange()">
+    <input class="select-pages" type="number" placeholder="Max Pages" [(ngModel)]="maxPages" (input)="filterChange()">
   </div>
-  
+  <div class="filter-block-lower">
+    <select class="select-item" [(ngModel)]="selectedAuthor" (change)="filterChange()">
+      <option value="">Select Author</option>
+      <option *ngFor="let author of authors" [value]="author">{{ author }}</option>
+    </select>
+
+    <select class="select-item" [(ngModel)]="selectedGenre" (change)="filterChange()">
+      <option value="">Select Genre</option>
+      <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+    </select>
+
+    <select class="select-item" [(ngModel)]="selectedLanguage" (change)="filterChange()">
+      <option value="">Select Language</option>
+      <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
+    </select>
+
+    <button class="btn-reset" (click)="resetFilters()">Reset Filters</button>
+  </div>
+</div>

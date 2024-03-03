@@ -1,4 +1,10 @@
-<app-search-bar (searchEvent)="searchBooks($event)"></app-search-bar>
+<app-search-bar
+  [authors]="authors"
+  [genres]="genres"
+  [languages]="languages"
+  (filterChangeEvent)="filterBooks($event)"
+  (searchEvent)="searchBooks($event)"
+></app-search-bar>
 <div class="book-container">
   <app-book-tile
     *ngFor="let book of filteredBooks"
