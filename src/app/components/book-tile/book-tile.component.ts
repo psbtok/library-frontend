@@ -13,5 +13,6 @@ export class BookTileComponent {
     pages: 0,
     language: '',
     genre: '',
+    description: ''
   };
 }

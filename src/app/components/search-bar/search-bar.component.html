@@ -6,10 +6,8 @@
       [(ngModel)]="searchTerm"
       (input)="search()"
     >
-    <button 
-      class="btn-clear"
-      *ngIf="searchTerm" 
-      (click)="clearSearch()"
-    >Clear</button>
+    <span class="btn-clear" *ngIf="searchTerm" (click)="clearSearch()">
+      <i class="fa fa-times"></i>
+    </span>
   </div>
   

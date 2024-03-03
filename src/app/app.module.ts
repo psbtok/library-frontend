@@ -9,10 +9,7 @@ import { AppComponent } from './app.component';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookTileComponent } from './components/book-tile/book-tile.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+import { BookPreviewComponent } from './components/book-preview/book-preview.component';
 
 @NgModule({
   declarations: [
@@ -20,16 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     BookListComponent,
     BookTileComponent,
     SearchBarComponent,
+    BookPreviewComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MatInputModule,
-    MatIconModule,
-    MatFormFieldModule,
-    BrowserAnimationsModule, // Add BrowserAnimationsModule to the imports array
   ],
   providers: [],
   bootstrap: [AppComponent]

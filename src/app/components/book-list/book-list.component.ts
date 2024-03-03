@@ -1,5 +1,3 @@
-// book-list.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { BookService } from '../../services/book.service';
@@ -13,6 +11,7 @@ import { Book } from '../../models/book.model';
 export class BookListComponent implements OnInit {
   books: Book[] = [];
   filteredBooks: Book[] = [];
+  selectedBook: Book | null = null;
 
   constructor(private bookService: BookService) {}
 
@@ -25,7 +24,6 @@ export class BookListComponent implements OnInit {
       this.bookService.getBooks(),
       this.bookService.getAuthors()
     ]).subscribe(([booksResponse, authorsResponse]) => {
-      console.log(authorsResponse);
       this.books = booksResponse.map(book => {
         const author = authorsResponse.find(author => author.uuid === book.author_uuid);
         return { ...book, author: author ? author.name : 'Unknown Author' };
@@ -36,11 +34,18 @@ export class BookListComponent implements OnInit {
   }
 
   searchBooks(searchTerm: string): void {
-    console.log(this.filteredBooks);
     this.filteredBooks = this.books.filter(book =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.description.toLowerCase().includes(searchTerm.toLowerCase())  || 
       book.author.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    console.log(this.filteredBooks);
+  }
+
+  openBookPreview(book: Book): void {
+    this.selectedBook = book;
+  }
+
+  closeBookPreview(): void {
+    this.selectedBook = null;
   }
 }

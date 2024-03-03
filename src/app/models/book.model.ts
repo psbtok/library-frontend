@@ -4,4 +4,5 @@ export interface Book {
     pages: number;
     language: string;
     genre: string;
+    description: string;
 }

@@ -1,0 +1,26 @@
+<div class="book-preview">
+    <div class="overlay" (click)="closePreview()"></div>
+    <div class="content">
+        <div class="info">  
+            <div class="book-details">
+                <div class="book-summary">
+                    <h2 class="book-title">{{ book.title }}</h2>
+                    <button class="close-btn" (click)="closePreview()">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <div class="details">
+                    <div class="left-details">
+                        <p class="author">Author: {{ book.author }}</p>
+                        <p class="pages">Pages: {{ book.pages }}</p>
+                        <p class="language">Language: {{ book.language }}</p>
+                        <p class="genre">Genre: {{ book.genre }}</p>
+                    </div>
+                    <div class="right-details">
+                        <p class="description">Description: {{ book.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
