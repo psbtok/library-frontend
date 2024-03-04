@@ -6,11 +6,16 @@
   (searchEvent)="searchBooks($event)"
 ></app-search-bar>
 <div class="book-container">
-  <app-book-tile
+  <div 
+    class="tile-container"
     *ngFor="let book of filteredBooks"
-    [book]="book"
-    (click)="openBookPreview(book)"
-  ></app-book-tile>
+  >
+    <app-book-tile
+      
+      [book]="book"
+      (click)="openBookPreview(book)"
+    ></app-book-tile>
+  </div>
 </div>
 <app-book-preview
   *ngIf="selectedBook"

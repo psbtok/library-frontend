@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-create',
@@ -33,7 +34,11 @@ export class BookCreateComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder, private bookService: BookService) {}
+  constructor(
+    private fb: FormBuilder, 
+    private bookService: BookService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -64,13 +69,13 @@ export class BookCreateComponent implements OnInit {
   }
 
   createBook(): void {
-    console.log(this.bookForm);
     if (this.bookForm.valid) {
       const newBook: Book = this.bookForm.value;
 
       this.bookService.createBook(newBook).subscribe(
         (response) => {
           console.log('Book created successfully:', response);
+          this.router.navigateByUrl('/books');
         },
         (error) => {
           console.error('Error creating book:', error);
