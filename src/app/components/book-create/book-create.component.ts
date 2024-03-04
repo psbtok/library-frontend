@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
+import { Author } from '../../models/author.model';
 
 @Component({
   selector: 'app-book-create',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BookCreateComponent implements OnInit {
   bookForm!: FormGroup;
-  authors: any[] = []; // Assuming authors have an 'id' and 'name' property
+  authors: Author[] = []; // Assuming authors have an 'id' and 'name' property
   validationMessages: { [key: string]: { [key: string]: string } } = {
     title: {
       required: 'Title is required.',

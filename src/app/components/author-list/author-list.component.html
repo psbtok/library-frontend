@@ -1,0 +1,46 @@
+<!-- authors.component.html -->
+<div class="author-list-container">
+    <div class="author-list">
+        <div class="author-row header">
+            <div class="author-info">
+                <span class="author-name">Name</span>
+                <span class="author-uuid">Unique identifier (UUID)</span>
+            </div>
+            <div class="author-controls"></div>
+        </div>
+        <div class="author-row">
+            <div class="author-info">
+                <input class="author-name" [(ngModel)]="newAuthorName" placeholder="New Author Name">
+                <input class="author-uuid" [(ngModel)]="newAuthorUuid" placeholder="New Author UUID">
+            </div>
+            <div class="author-controls">
+                <button (click)="addNewAuthor()">Add</button>
+            </div>
+        </div>
+        <div *ngFor="let author of authors">
+            <ng-container *ngIf="!author.editMode; else editMode">
+                <div class="author-row">
+                    <div class="author-info">
+                        <input class="author-name not-editing" [(ngModel)]="author.updatedName" placeholder="New Name">
+                        <input class="author-uuid not-editing" [(ngModel)]="author.updatedUuid" placeholder="New UUID">
+                    </div>
+                    <div class="author-controls">
+                        <button (click)="toggleEditMode(author)">Edit</button>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #editMode>
+                <div class="author-row">
+                    <div class="author-info">
+                        <input class="author-name" [(ngModel)]="author.updatedName" placeholder="New Name">
+                        <input class="author-uuid" [(ngModel)]="author.updatedUuid" placeholder="New UUID">
+                    </div>
+                    <div class="author-controls">
+                        <button (click)="confirmEdit(author)">Confirm</button>
+                        <button (click)="cancelEdit(author)">Cancel</button>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

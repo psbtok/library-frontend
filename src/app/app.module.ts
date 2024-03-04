@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthorListComponent } from './components/author-list/author-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SearchBarComponent,
     BookPreviewComponent,
     BookCreateComponent,
+    AuthorListComponent
   ],
   imports: [
     BrowserModule,
