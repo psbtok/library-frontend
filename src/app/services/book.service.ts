@@ -33,4 +33,9 @@ export class BookService {
     const createAuthorUrl = `${this.apiUrl}/authors`;
     return this.http.post<Author>(createAuthorUrl, author);
   }
+
+  resetData(): Observable<any> {
+    const resetDataUrl = `${this.apiUrl}/reset_data`;
+    return this.http.post<any>(resetDataUrl, {});
+  }
 }
