@@ -17,7 +17,6 @@ export class AppComponent {
       (response) => {
         console.log('Data reset successfully:', response);
         this.router.navigate(['/']);
-        window.location.reload();
       },
       (error) => {
         console.error('Error resetting data:', error);
