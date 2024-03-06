@@ -76,7 +76,7 @@ export class BookCreateComponent implements OnInit {
       this.bookService.createBook(newBook).subscribe(
         (response) => {
           console.log('Book created successfully:', response);
-          this.router.navigateByUrl('/books');
+          this.router.navigateByUrl('/');
         },
         (error) => {
           console.error('Error creating book:', error);
