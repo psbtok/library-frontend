@@ -1,8 +1,6 @@
-// author-list.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../../services/book.service';
 import { Author } from '../../models/author.model';
+import { DbService } from '../../services/db';
 
 @Component({
   selector: 'app-author-list',
@@ -14,32 +12,31 @@ export class AuthorListComponent implements OnInit {
   newAuthorName = '';
   newAuthorUuid = '';
 
-  constructor(private bookService: BookService) {}
+  constructor(private dbService: DbService) {}
 
   ngOnInit(): void {
     this.loadAuthors();
   }
 
-  loadAuthors(): void {
-    this.bookService.getAuthors().subscribe(
-      (authors) => {
-        this.authors = authors.map(author => ({ ...author, editMode: false, updatedName: author.name, updatedUuid: author.uuid }));
-      },
-      (error) => {
-        console.error('Error fetching authors:', error);
-      }
-    );
+  async loadAuthors(): Promise<void> {
+    try {
+      const authorsFromDb = await this.dbService.authors.toArray();
+      this.authors = authorsFromDb.map(author => ({
+        ...author,
+        updatedUuid: author.uuid,
+        updatedName: author.name
+      }));
+    } catch (error) {
+      console.error('Error fetching authors:', error);
+    }
   }
-
-  toggleEditMode(author: Author): void {
-    author.editMode = !author.editMode;
-  }
-
-  confirmEdit(author: any): void {
-    const updatedUuid: string | undefined = author.updatedUuid;
-    const updatedName: string | undefined = author.updatedName;
   
-    if (updatedUuid === undefined || updatedName === undefined) {
+
+  async confirmEdit(author: Author): Promise<void> {
+    const updatedUuid = author.updatedUuid;
+    const updatedName = author.updatedName;
+  
+    if (!updatedUuid || !updatedName) {
       console.error('Invalid values for updated UUID or name.');
       return;
     }
@@ -56,16 +53,13 @@ export class AuthorListComponent implements OnInit {
       this.authors[updatedAuthorIndex].uuid = updatedUuid;
       this.authors[updatedAuthorIndex].name = updatedName;
       
-      // Make API call to update the author in the backend
-      this.bookService.createAuthor({ uuid: updatedUuid, name: updatedName }).subscribe(
-        (response) => {
-          console.log('Author updated successfully:', response);
-          author.editMode = false;
-        },
-        (error) => {
-          console.error('Error updating author:', error);
-        }
-      );
+      try {
+        await this.dbService.authors.put({ uuid: updatedUuid, name: updatedName });
+        console.log('Author updated successfully');
+        author.editMode = false;
+      } catch (error) {
+        console.error('Error updating author:', error);
+      }
     }
   }    
 
@@ -75,7 +69,7 @@ export class AuthorListComponent implements OnInit {
     author.updatedUuid = author.uuid;
   }
 
-  addNewAuthor(): void {
+  async addNewAuthor(): Promise<void> {
     if (this.newAuthorName.trim() === '' || this.newAuthorUuid.trim() === '') {
       console.error('New author name and UUID are required.');
       return;
@@ -89,18 +83,19 @@ export class AuthorListComponent implements OnInit {
     }
   
     const newAuthor: Author = { name: this.newAuthorName, uuid: this.newAuthorUuid };
-    this.bookService.createAuthor(newAuthor).subscribe(
-      (response) => {
-        console.log('New author added successfully:', response);
-        this.newAuthorName = '';
-        this.newAuthorUuid = '';
-        this.loadAuthors();
-      },
-      (error) => {
-        console.error('Error adding new author:', error);
-      }
-    );
+    try {
+      // Add the new author to the database
+      await this.dbService.authors.put(newAuthor);
+      console.log('New author added successfully');
+      this.newAuthorName = '';
+      this.newAuthorUuid = '';
+      await this.loadAuthors();
+    } catch (error) {
+      console.error('Error adding new author:', error);
+    }
+  } 
+
+  toggleEditMode(author: Author): void {
+    author.editMode = !author.editMode;
   }
-  
-  
 }

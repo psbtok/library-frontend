@@ -10,7 +10,7 @@ import { Author } from '../models/author.model';
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'https://library-backend-lxz5.onrender.com';
+  private apiUrl = '';
 
   constructor(private http: HttpClient) {}
 

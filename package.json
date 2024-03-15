@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^17.2.0",
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
+    "dexie": "^3.2.6",
     "font-awesome": "^4.7.0",
     "netlify-cli": "^17.17.1",
     "rxjs": "~7.8.0",

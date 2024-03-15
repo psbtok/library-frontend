@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../../models/book.model';
-import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
 import { Author } from '../../models/author.model';
+import { db } from '../../services/db';
 
 @Component({
   selector: 'app-book-create',
@@ -12,7 +12,7 @@ import { Author } from '../../models/author.model';
 })
 export class BookCreateComponent implements OnInit {
   bookForm!: FormGroup;
-  authors: Author[] = []; // Assuming authors have an 'id' and 'name' property
+  authors: Author[] = [];
   validationMessages: { [key: string]: { [key: string]: string } } = {
     title: {
       required: 'Title is required.',
@@ -36,8 +36,7 @@ export class BookCreateComponent implements OnInit {
   };
 
   constructor(
-    private fb: FormBuilder, 
-    private bookService: BookService,
+    private fb: FormBuilder,
     private router: Router
   ) {}
 
@@ -59,29 +58,23 @@ export class BookCreateComponent implements OnInit {
   }
 
   loadAuthors(): void {
-    this.bookService.getAuthors().subscribe(
-      (authors) => {
-        this.authors = authors;
-      },
-      (error) => {
-        console.error('Error fetching authors:', error);
-      }
-    );
+    db.authors.toArray().then(authors => {
+      this.authors = authors;
+    }).catch(error => {
+      console.error('Error fetching authors:', error);
+    });
   }
 
   createBook(): void {
     if (this.bookForm.valid) {
       const newBook: Book = this.bookForm.value;
 
-      this.bookService.createBook(newBook).subscribe(
-        (response) => {
-          console.log('Book created successfully:', response);
-          this.router.navigateByUrl('/');
-        },
-        (error) => {
-          console.error('Error creating book:', error);
-        }
-      );
+      db.books.add(newBook).then(() => {
+        console.log('Book created successfully');
+        this.router.navigateByUrl('/');
+      }).catch(error => {
+        console.error('Error creating book:', error);
+      });
     } else {
       this.showValidationErrors();
     }
